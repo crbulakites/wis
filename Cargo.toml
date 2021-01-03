@@ -1,0 +1,31 @@
+[package]
+name = "wis"
+version = "0.1.0"
+authors = ["Connor Bulakites <connor@bulakites.net>"]
+include = [
+    "**/*.rs",
+    "**/*.rustpeg",
+    "Cargo.toml",
+    "LICENSE",
+    "README.md",
+]
+description = "Experimenting with decision trees from scratch"
+repository = "https://github.com/crbulakites/wis"
+readme = "README.md"
+keywords = ["machine-learning", "decision-tree", "random-forest"]
+categories = ["Algorithms", "Science"]
+license = "MIT"
+
+[lib]
+name = "wis"
+path = "src/lib.rs"
+
+[[bin]]
+name = "wis"
+path = "src/bin.rs"
+
+[badges]
+maintenance = { status = "experimental" }
+
+[dependencies]
+csv = "1.1.5"
