@@ -1,17 +1,16 @@
 extern crate wis;
 
 use wis::DecisionTree;
-use wis::df::DataFrame;
+use wis::df::{DataFrame, DataColumn};
 
 
 fn main() {
     let df = DataFrame::new(
         vec!["x", "y", "label"],
         vec![
-            (0.0, 0.0, false),
-            (0.0, 1.0, true),
-            (1.0, 0.0, true),
-            (1.0, 1.0, false),
+            DataColumn::Numerical(vec![0.0, 0.0, 1.0, 1.0]),
+            DataColumn::Numerical(vec![0.0, 1.0, 0.0, 1.0]),
+            DataColumn::Boolean(vec![false, true, true, false]),
         ],
     );
     println!("{}", df);
