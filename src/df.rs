@@ -10,16 +10,16 @@ pub enum DataColumn {
 
 pub struct DataFrame {
     pub column_names: Vec<String>,
-    pub rows: Vec<DataColumn>,
+    pub columns: Vec<DataColumn>,
 }
 
 
 impl DataFrame {
     pub fn new(
         column_names: Vec<&'static str>,
-        rows: Vec<DataColumn>,
+        columns: Vec<DataColumn>,
     ) -> Self {
-        let mut df = DataFrame{column_names: vec![], rows};
+        let mut df = DataFrame{column_names: vec![], columns};
 
         for column_name in column_names {
             df.column_names.push(String::from(column_name));
@@ -37,13 +37,13 @@ impl fmt::Display for DataFrame {
         let header = self.column_names.join(" | ");
         lines.push(header);
 
-        for row in &self.rows {
-            let row_formatted = match row {
+        for column in &self.columns {
+            let column_formatted = match column {
                 DataColumn::Numerical(_) => String::from("Numerical Row"),
                 DataColumn::Categorical(v) => v.join(" | "),
                 DataColumn::Boolean(_) => String::from("Boolean Row"),
             };
-            lines.push(row_formatted);
+            lines.push(column_formatted);
         }
 
         let output = lines.join("\n");
