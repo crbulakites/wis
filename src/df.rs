@@ -37,17 +37,30 @@ impl fmt::Display for DataFrame {
         let header = self.column_names.join(" | ");
         lines.push(header);
 
-        for column in &self.columns {
-            let column_formatted = match column {
-                DataColumn::Numerical(_) => String::from("Numerical Row"),
-                DataColumn::Categorical(v) => v.join(" | "),
-                DataColumn::Boolean(_) => String::from("Boolean Row"),
-            };
-            lines.push(column_formatted);
+        let num_rows = match &self.columns[0] {
+            DataColumn::Numerical(v) => v.len(),
+            DataColumn::Categorical(v) => v.len(),
+            DataColumn::Boolean(v) => v.len(),
+        };
+
+        for i in 0..num_rows {
+            let mut row: Vec<String> = vec![];
+
+            for column in &self.columns {
+                let cell = match column {
+                    DataColumn::Numerical(v) => format!("{}", v[i]),
+                    DataColumn::Categorical(v) => format!("{}", v[i]),
+                    DataColumn::Boolean(v) => format!("{}", v[i]),
+                };
+
+                row.push(cell);
+            }
+
+            let row_formatted = row.join(" | ");
+            lines.push(row_formatted);
         }
 
         let output = lines.join("\n");
-
         write!(f, "{}", output)
     }
 }
