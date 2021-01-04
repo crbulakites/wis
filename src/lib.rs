@@ -1,3 +1,5 @@
+pub mod df;
+
 use std::fmt;
 
 
@@ -10,3 +12,4 @@ impl fmt::Display for DecisionTree {
         write!(f, "DecisionTree")
     }
 }
+
